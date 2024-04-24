@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+
+    <item
+        android:title="Search"
+        android:id="@+id/search"
+        android:icon="@drawable/baseline_search_24"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="ifRoom|collapseActionView"/>
+
+
+
+    <item
+        android:title="Notifications"
+        android:id="@+id/notifications"
+        android:icon="@drawable/baseline_notifications_24"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:title="Calendar"
+        android:id="@+id/calendar"
+        android:icon="@drawable/baseline_calendar_month_24"
+        app:showAsAction="ifRoom"/>
+
+</menu>
