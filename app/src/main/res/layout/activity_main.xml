@@ -21,7 +21,7 @@
         android:id="@+id/bottomView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="-210dp"
+        android:layout_marginBottom="-160dp"
         android:src="@drawable/bottom_white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -43,14 +43,27 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Our app serves as the ultimate solution
-        for all your plant irrigation needs."
+        android:text="Our app serves as the ultimate solution"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/bottomView"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="-350dp"
+        android:textSize="20sp"
+        app:layout_constraintHorizontal_bias="0.124"
+        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="center"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="for all your plant irrigation needs."
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/bottomView"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="-375dp"
         android:textSize="20sp"
         app:layout_constraintHorizontal_bias="0.124"
         app:layout_constraintStart_toStartOf="parent"

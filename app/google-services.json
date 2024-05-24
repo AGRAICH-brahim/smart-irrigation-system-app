@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "894341704155",
+    "firebase_url": "https://irrigationsystem-67026-default-rtdb.firebaseio.com",
+    "project_id": "irrigationsystem-67026",
+    "storage_bucket": "irrigationsystem-67026.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:894341704155:android:c8341c58b480c33eb95ffe",
+        "android_client_info": {
+          "package_name": "com.example.smartirrigationsystem"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0RBnm5Lsxf9RQ8f6AqMzwn3A1ihZsGEE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

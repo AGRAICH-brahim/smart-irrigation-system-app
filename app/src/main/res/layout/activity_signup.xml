@@ -53,6 +53,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:id="@+id/nameUser"
             android:layout_marginTop="12dp"
             android:background="@drawable/edittext_background"
             android:ems="10"
@@ -75,6 +76,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:id="@+id/emailUSer"
             android:layout_marginTop="12dp"
             android:background="@drawable/edittext_background"
             android:ems="10"
@@ -97,6 +99,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:id="@+id/passwordUser"
             android:layout_marginTop="12dp"
             android:background="@drawable/edittext_background"
             android:ems="10"
@@ -118,6 +121,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:id="@+id/repasswordUser"
             android:layout_marginTop="12dp"
             android:background="@drawable/edittext_background"
             android:ems="10"
@@ -131,18 +135,19 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/loginRedirectText"
             android:layout_marginTop="32dp"
             android:text="Already have an account? Login Now"
             android:textAlignment="center" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/botton2"
+            android:id="@+id/bottonLoad"
             style="@android:style/Widget.Button"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="32dp"
             android:background="@drawable/botton_background"
-            android:text="Login"
+            android:text="Sign Up"
             android:textColor="#ffffff"
             android:textSize="25sp"
             android:textStyle="bold" />
