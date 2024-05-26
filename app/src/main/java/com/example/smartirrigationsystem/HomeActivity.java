@@ -44,6 +44,7 @@ public class HomeActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(toggle) ;
         toggle.syncState();
 
+
         if (savedInstanceState == null ) {
             getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new com.example.smartirrigationsystem.fragment.Home()).commit();
             navigationView.setCheckedItem(R.id.nav_home);

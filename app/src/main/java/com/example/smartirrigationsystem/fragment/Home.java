@@ -15,6 +15,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 public class Home extends Fragment {
@@ -50,30 +51,35 @@ public class Home extends Fragment {
             String userId = currentUser.getUid();
 
             // Reference to the user's data
-            DatabaseReference userRef = mDatabase.child("Users").child(userId).child("dataPlant").child("-NygAm9m-QebdHexWL0Q");
+            DatabaseReference userRef = mDatabase.child("Users").child(userId).child("dataPlant");
+
+            // Query to get the last entry
+            Query lastEntryQuery = userRef.orderByKey().limitToLast(1);
 
             // Attach a listener to read the data at our user reference
-            userRef.addValueEventListener(new ValueEventListener() {
+            lastEntryQuery.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.exists()) {
-                        Long humidity = dataSnapshot.child("humidity").getValue(Long.class);
-                        Long soilHumidity = dataSnapshot.child("soilHumidity").getValue(Long.class);
-                        Long temperature = dataSnapshot.child("temperature").getValue(Long.class);
+                    for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                        if (snapshot.exists()) {
+                            Long humidity = snapshot.child("humidity").getValue(Long.class);
+                            Long soilHumidity = snapshot.child("soilHumidity").getValue(Long.class);
+                            Long temperature = snapshot.child("temperature").getValue(Long.class);
 
-                        if (humidity != null) {
-                            humidityTextView.setText("Humidity: " + humidity + "%");
-                        }
+                            if (humidity != null) {
+                                humidityTextView.setText( humidity + "%");
+                            }
 
-                        if (soilHumidity != null) {
-                            soilHumidityTextView.setText("Soil Humidity: " + soilHumidity + "%");
-                        }
+                            if (soilHumidity != null) {
+                                soilHumidityTextView.setText( soilHumidity + "%");
+                            }
 
-                        if (temperature != null) {
-                            temperatureTextView.setText("Temperature: " + temperature + "°C");
+                            if (temperature != null) {
+                                temperatureTextView.setText( temperature + "°C");
+                            }
+                        } else {
+                            Toast.makeText(getActivity(), "No data available", Toast.LENGTH_SHORT).show();
                         }
-                    } else {
-                        Toast.makeText(getActivity(), "No data available", Toast.LENGTH_SHORT).show();
                     }
                 }
 
