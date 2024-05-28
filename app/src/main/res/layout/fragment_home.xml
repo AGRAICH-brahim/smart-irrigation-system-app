@@ -234,8 +234,10 @@
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
+                                        android:id="@+id/pumpStatusTextView"
                                         android:textSize="38dp"
                                         android:text="Off"/>
+
                                 </LinearLayout>
                             </LinearLayout>
                         </androidx.cardview.widget.CardView>
@@ -244,16 +246,7 @@
 
             </ScrollView>
         </LinearLayout>
-        <TextView
-            android:layout_width="308dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:id="@+id/apivalue"
-            android:layout_weight="1"
-            android:background="@color/white"
-            android:text="Welcome to your dashboard"
-            android:textAlignment="center"
-            android:textSize="30dp" />
+
     </LinearLayout>
 
 

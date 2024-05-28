@@ -23,6 +23,7 @@ public class Home extends Fragment {
     private TextView temperatureTextView;
     private TextView humidityTextView;
     private TextView soilHumidityTextView;
+    private TextView pumpStatusTextView;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
@@ -44,6 +45,7 @@ public class Home extends Fragment {
         temperatureTextView = rootView.findViewById(R.id.temperatureTextView);
         humidityTextView = rootView.findViewById(R.id.humidityTextView);
         soilHumidityTextView = rootView.findViewById(R.id.soilHumidityTextView);
+        pumpStatusTextView = rootView.findViewById(R.id.pumpStatusTextView);
 
         // Get current user
         FirebaseUser currentUser = mAuth.getCurrentUser();
@@ -51,10 +53,11 @@ public class Home extends Fragment {
             String userId = currentUser.getUid();
 
             // Reference to the user's data
-            DatabaseReference userRef = mDatabase.child("Users").child(userId).child("dataPlant");
+            DatabaseReference userRef = mDatabase.child("Users").child(userId);
 
-            // Query to get the last entry
-            Query lastEntryQuery = userRef.orderByKey().limitToLast(1);
+            // Query to get the last entry of dataPlant
+            DatabaseReference dataPlantRef = userRef.child("dataPlant");
+            Query lastEntryQuery = dataPlantRef.orderByKey().limitToLast(1);
 
             // Attach a listener to read the data at our user reference
             lastEntryQuery.addValueEventListener(new ValueEventListener() {
@@ -67,16 +70,53 @@ public class Home extends Fragment {
                             Long temperature = snapshot.child("temperature").getValue(Long.class);
 
                             if (humidity != null) {
-                                humidityTextView.setText( humidity + "%");
+                                humidityTextView.setText(humidity + "%");
                             }
 
                             if (soilHumidity != null) {
-                                soilHumidityTextView.setText( soilHumidity + "%");
+                                soilHumidityTextView.setText(soilHumidity + "");
                             }
 
                             if (temperature != null) {
-                                temperatureTextView.setText( temperature + "°C");
+                                temperatureTextView.setText(temperature + "°C");
                             }
+
+                            // Handle pump control and state
+                            userRef.child("pumpControl").addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(DataSnapshot pumpControlSnapshot) {
+                                    String pumpControl = pumpControlSnapshot.getValue(String.class);
+
+                                    if (pumpControl != null && pumpControl.equals("auto") && humidity != null) {
+                                        // Automatic control logic
+                                        if (humidity > 450) {
+                                            updatePumpState(userId, "on");
+                                        } else {
+                                            updatePumpState(userId, "off");
+                                        }
+                                    } else {
+                                        userRef.child("pumpState").addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(DataSnapshot pumpStateSnapshot) {
+                                                String pumpState = pumpStateSnapshot.getValue(String.class);
+                                                if (pumpState != null) {
+                                                    pumpStatusTextView.setText(pumpState);
+                                                }
+                                            }
+
+                                            @Override
+                                            public void onCancelled(DatabaseError databaseError) {
+                                                Toast.makeText(getActivity(), "Failed to load pump state.", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                    }
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+                                    Toast.makeText(getActivity(), "Failed to load pump control.", Toast.LENGTH_SHORT).show();
+                                }
+                            });
                         } else {
                             Toast.makeText(getActivity(), "No data available", Toast.LENGTH_SHORT).show();
                         }
@@ -92,5 +132,16 @@ public class Home extends Fragment {
         }
 
         return rootView;
+    }
+
+    private void updatePumpState(String userId, String state) {
+        DatabaseReference pumpStateRef = mDatabase.child("Users").child(userId).child("pumpState");
+        pumpStateRef.setValue(state).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                pumpStatusTextView.setText(state);
+            } else {
+                Toast.makeText(getActivity(), "Failed to update pump state.", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

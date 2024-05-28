@@ -26,7 +26,7 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:background="@color/white"
-            android:text="Humidity values on reel \n time"
+            android:text="The variation of the \n humidity value in the soil"
             android:textColor="@color/green"
             android:textAlignment="center"
             android:textSize="30dp" />

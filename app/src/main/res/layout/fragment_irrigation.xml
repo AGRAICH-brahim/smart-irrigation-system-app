@@ -6,6 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".fragment.Irrigation">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="60dp">
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -136,6 +142,81 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+
+            <!-- Additional Card for Auto Mode -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/autoModeCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="12dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="6dp"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="6dp">
+
+                    <TextView
+                        android:id="@+id/autoModeStatusText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Auto irrigation mode is active"
+                        android:textSize="24dp"
+                        android:padding="5dp"
+                        android:textColor="@color/green"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="10dp">
+
+                        <ImageView
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:src="@drawable/sol"/>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:padding="10dp">
+
+                            <TextView
+                                android:id="@+id/autoModeApiResponseText"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="In a very dry soil condition, the ground is parched and cracked, lacking moisture entirely. Plants struggle to survive, showing signs of wilting and browning. The air is often hot and arid, exacerbating the dryness."
+                                android:gravity="center"
+                                android:textSize="18dp"
+                                android:padding="5dp"
+                                android:textColor="@color/black"/>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Pompe Is Off"
+                        android:gravity="center"
+                        android:textSize="22dp"
+                        android:padding="5dp"
+                        android:textColor="@color/black"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+
+
             <!-- Additional Card for Manual Mode -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/manualModeCard"
@@ -205,13 +286,24 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Pompe Is Off"
+                        android:text="Recommendation"
                         android:gravity="center"
                         android:textSize="22dp"
+                        android:padding="5dp"
+                        android:textColor="@color/black"/>
+                    <TextView
+                        android:id="@+id/ManualModeApiResponseText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="In a very dry soil condition, the ground is parched and cracked, lacking moisture entirely. Plants struggle to survive, showing signs of wilting and browning. The air is often hot and arid, exacerbating the dryness."
+                        android:gravity="center"
+                        android:textSize="18dp"
                         android:padding="5dp"
                         android:textColor="@color/black"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
         </GridLayout>
     </LinearLayout>
+
+    </ScrollView>
 </FrameLayout>
